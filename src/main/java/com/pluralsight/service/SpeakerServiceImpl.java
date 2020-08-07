@@ -8,8 +8,7 @@ import java.util.List;
 
 public class SpeakerServiceImpl implements SpeakerService {
 
-    // Punto dolente del codice: se cambio implementazione devo rciompilare tutto l'applicativo
-    private SpeakerRepository repository = new HibernateSpeakerRepositoryImpl();
+    private SpeakerRepository repository;
 
     @Override
     public List<Speaker> findAll(){
@@ -17,4 +16,8 @@ public class SpeakerServiceImpl implements SpeakerService {
         return repository.findAll();
     }
 
+    // Setter Injection: Repository injected instead of hard coded
+    public void setRepository(SpeakerRepository repository) {
+        this.repository = repository;
+    }
 }
