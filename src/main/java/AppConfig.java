@@ -2,8 +2,10 @@ import com.pluralsight.repository.HibernateSpeakerRepositoryImpl;
 import com.pluralsight.repository.SpeakerRepository;
 import com.pluralsight.service.SpeakerService;
 import com.pluralsight.service.SpeakerServiceImpl;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 // Annotazione a livello di classe che va a sostituire l'applicationContext.xml
 //
@@ -16,6 +18,7 @@ public class AppConfig {
     //
     // NOTA: i bean creati sono tutti SINGLETON
     @Bean(name="speakerService")
+    @Scope(value= BeanDefinition.SCOPE_SINGLETON)
     public SpeakerService getSpeakerService(){
         // Constructor Injection
         SpeakerServiceImpl service = new SpeakerServiceImpl(getSpeakerRepository());
