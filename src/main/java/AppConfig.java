@@ -18,17 +18,22 @@ public class AppConfig {
     //
     // NOTA: i bean creati sono tutti SINGLETON
     @Bean(name="speakerService")
-    @Scope(value= BeanDefinition.SCOPE_PROTOTYPE)
+    @Scope(value= BeanDefinition.SCOPE_SINGLETON)
     public SpeakerService getSpeakerService(){
         // Constructor Injection
-        SpeakerServiceImpl service = new SpeakerServiceImpl(getSpeakerRepository());
+        // SpeakerServiceImpl service = new SpeakerServiceImpl(getSpeakerRepository());
+
+        // Non faccio l'injection del repository
+        SpeakerServiceImpl service = new SpeakerServiceImpl();
+
         // Setter Injection
         //service.setRepository(getSpeakerRepository());
         return service;
     }
 
     // NOTA: il nome dei bean è molto importante (auto-wiring)
-    // In questo step definire un bean non sembra importante
+    // In questo step non sembra importante il nome del bean: è importante che però Spring abbia registrato il bean
+    // e che sia disponibile come candidato per una futura injection
     // IL fatto che questo metodo restituisce un bean significa che HibernateSpeakerRepositoryImpl sarà creato una volta sola
     @Bean(name="speakerRepository")
     public SpeakerRepository getSpeakerRepository(){
