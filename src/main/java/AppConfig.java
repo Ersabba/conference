@@ -18,7 +18,7 @@ public class AppConfig {
     //
     // NOTA: i bean creati sono tutti SINGLETON
     @Bean(name="speakerService")
-    @Scope(value= BeanDefinition.SCOPE_SINGLETON)
+    @Scope(value= BeanDefinition.SCOPE_PROTOTYPE)
     public SpeakerService getSpeakerService(){
         // Constructor Injection
         SpeakerServiceImpl service = new SpeakerServiceImpl(getSpeakerRepository());
