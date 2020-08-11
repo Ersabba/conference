@@ -8,6 +8,7 @@ public class Application {
 
     public static void main(String[] args){
 
+        // Tutte le nostre configurazioni sono in AppConfig
         ApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
         SpeakerService service = appContext.getBean("speakerService",SpeakerService.class);
