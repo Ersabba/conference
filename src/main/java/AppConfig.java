@@ -2,11 +2,14 @@ import com.pluralsight.repository.HibernateSpeakerRepositoryImpl;
 import com.pluralsight.repository.SpeakerRepository;
 import com.pluralsight.service.SpeakerService;
 import com.pluralsight.service.SpeakerServiceImpl;
+import com.pluralsight.util.CalendarFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+
+import java.util.Calendar;
 
 // Annotazione a livello di classe che va a sostituire l'applicationContext.xml
 //
@@ -17,6 +20,18 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 @ComponentScan({"com.pluralsight"})
 public class AppConfig {
+
+    @Bean(name = "cal4")
+    public CalendarFactory calFactory(){
+        CalendarFactory factory = new CalendarFactory();
+        factory.addDays(2);
+        return factory;
+    }
+
+    @Bean
+    public Calendar cal() throws Exception {
+        return calFactory().getObject();
+    }
 
     // Annotazione da usare su un metodo: ci dice che il metodo restituisce uno Spring Bean
     // e può essere usato all'interno della nostra applicazione
